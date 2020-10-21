@@ -8,7 +8,9 @@ using namespace std;
 
 class MovieElement {
 public:
-	MovieElement(const Movie& movie);
+	MovieElement();
+
+	explicit MovieElement(const Movie& movie);
 
 	bool operator<(const MovieElement& other);
 

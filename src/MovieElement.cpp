@@ -1,5 +1,9 @@
 #include "MovieElement.h"
 
+MovieElement::MovieElement()
+	: movie(Movie()), weightedSum(0) {
+}
+
 MovieElement::MovieElement(const Movie& _movie)
 	: movie(_movie), weightedSum(0) {
 }

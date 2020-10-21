@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Movie& ParseMovie(Tokenizer& tokenizer);
+Movie ParseMovie(Tokenizer& tokenizer);
 
 // entry point
 int main() {
@@ -34,72 +34,37 @@ int main() {
 	tokenizer.Tokenize(tempLine);
 	list.Add(ParseMovie(tokenizer));
 
-
+	list.PrintFirst10Movies();
 
 	return 0;
 }
 
-Movie& ParseMovie(Tokenizer& tokenizer) {
+Movie ParseMovie(Tokenizer& tokenizer) {
 	Movie movie;
-	string token;
 
-	while (tokenizer.HasTokensRemaining()) {
-		//tokenizer.NextToken(); // imdb_title_id
+	tokenizer.NextToken(); // imdb_title_id
+	movie.title = tokenizer.NextToken();
+	tokenizer.NextToken(); // original_title
+	movie.year = stoi(tokenizer.NextToken());
+	tokenizer.NextToken(); // date
+	movie.genre = tokenizer.NextToken();
+	movie.duration = stoi(tokenizer.NextToken());
+	movie.country = tokenizer.NextToken();
+	movie.language = tokenizer.NextToken();
+	movie.director = tokenizer.NextToken();
+	movie.writer = tokenizer.NextToken();
+	tokenizer.NextToken(); // production company
+	movie.actors = tokenizer.NextToken();
+	movie.description = tokenizer.NextToken();
+	movie.rating = stod(tokenizer.NextToken());
 
-		token = tokenizer.NextToken();
-		cout << token << endl;
-		//movie.title = token;
-
-		//tokenizer.NextToken(); // original_title
-
-		//token = tokenizer.NextToken();
-		//cout << token << endl;
-		////movie.year = stoi(token);
-
-		//tokenizer.NextToken(); // date
-
-		//token = tokenizer.NextToken();
-		//cout << token << endl;
-		////movie.genre = token;
-
-		//token = tokenizer.NextToken();
-		//cout << token << endl;
-		//movie.duration = stoi(token);
-
-		//movie.country = tokenizer.NextToken();
-		//movie.language = tokenizer.NextToken();
-		//movie.director = tokenizer.NextToken();
-		//movie.writer = tokenizer.NextToken();
-		//tokenizer.NextToken(); // production company
-		//movie.actors = tokenizer.NextToken();
-		//movie.description = tokenizer.NextToken();
-		//movie.rating = stod(tokenizer.NextToken());
-
-		// skip the remaining tokens:
-		// budget
-		// usa_gross_income
-		// worlwide_gross_income
-		// metascore
-		// reviews_from_users
-		// reviews_from_critics
-	}
+	// skip the remaining tokens:
+	// budget
+	// usa_gross_income
+	// worlwide_gross_income
+	// metascore
+	// reviews_from_users
+	// reviews_from_critics
 
 	return movie;
 }
-
-//void PrintCSV(Tokenizer& tokenizer, Tokenizer& subTokenizer, const string& line) {
-//	tokenizer.Tokenize(line);
-//
-//	string token;
-//	while (tokenizer.HasTokensRemaining()) {
-//		token = tokenizer.NextToken();
-//		cout << "-> " << token << endl;
-//		subTokenizer.Tokenize(token);
-//
-//		if (subTokenizer.TokenCount() > 1) {
-//			while (subTokenizer.HasTokensRemaining()) {
-//				cout << "    -> " << subTokenizer.NextToken() << endl;
-//			}
-//		}
-//	}
-//}

@@ -12,7 +12,7 @@ public:
 
 	void Sort(/* user input */);
 
-	void PrintFirst10Movies();
+	void PrintFirst10Movies() const;
 
 private:
 	vector<MovieElement> movies;
