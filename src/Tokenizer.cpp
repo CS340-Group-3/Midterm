@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Tokenizer.h"
 
 Tokenizer::Tokenizer()
@@ -58,8 +59,8 @@ void Tokenizer::Tokenize(const string& line) {
 
     /*
      * Add the last token since tokens only
-     * get added when a non-escaped delimiter is found
-     * in the loop
+     * get added when a non-escaped delimiter
+     * is found in the loop
      */
     tokens.push_back(token);
 }
