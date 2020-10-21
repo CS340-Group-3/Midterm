@@ -48,17 +48,16 @@ struct Movie {
 //	const string& GetActors() const;
 //	double GetRating() const;
 	string title;
-	unsigned int year;
-	string genre;
-	unsigned int duration;
-	string country;
-	string language;
-	string director;
-	string writer;
+	int year = -1;
+	string genres;
+	int duration = -1;
+	string countries;
+	string languages;
+	string directors;
+	string writers;
 	string description;
 	string actors;
-	double rating;
-
+	double rating = -1;
 };
 
 #endif

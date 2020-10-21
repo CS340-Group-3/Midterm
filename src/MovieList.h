@@ -1,8 +1,9 @@
 #ifndef MOVIELIST_H
 #define MOVIELIST_H
 
-#include "MovieElement.h"
 #include <vector>
+
+#include "MovieElement.h"
 
 class MovieList {
 public:
