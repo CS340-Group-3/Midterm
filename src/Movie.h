@@ -6,7 +6,21 @@
 
 using namespace std;
 
+/*
+ * Represents data for a movie
+ */
 struct Movie {
+	string title;
+	int year = -1;
+	string genres;
+	int duration = -1;
+	string countries;
+	string languages;
+	string directors;
+	string writers;
+	string description;
+	string actors;
+	double rating = -1;
 
 	friend ostream& operator<<(ostream& os, const Movie& movie) {
 		os << movie.title << endl;
@@ -22,18 +36,6 @@ struct Movie {
 		os << movie.rating << endl;
 		return os;
 	}
-
-	string title;
-	int year = -1;
-	string genres;
-	int duration = -1;
-	string countries;
-	string languages;
-	string directors;
-	string writers;
-	string description;
-	string actors;
-	double rating = -1;
 };
 
 #endif

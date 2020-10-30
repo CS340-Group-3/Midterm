@@ -7,19 +7,35 @@
 
 using namespace std;
 
+/*
+ * A MovieElement is a wrapper class to add
+ * functionality to a Movie object.
+ */
 class MovieElement {
 public:
+	/* Constructs a default MovieElement with
+	 * an empty movie
+	 */
 	MovieElement();
 
-	explicit MovieElement(const Movie& movie);
+	/* Constructs a MovieElement for a Movie*/
+	MovieElement(const Movie& movie);
 
+	/* Compares in decending order */
 	bool operator<(const MovieElement& other);
 
+	/* Gets the actual movie object */
 	const Movie& GetMovie() const {
 		return movie;
 	}
 
-private:
+	/*
+	 * Calculates the weighted sum for the movie.
+	 * Each field from the movie will be compared
+	 * to the parameters and sets the weightedSum
+	 * field. More weight will sort higher in the
+	 * movie list
+	 */
 	void CalculateWeightedSum(
 		int year, int duration, double rating,
 		const vector<string>& genre,
@@ -30,8 +46,22 @@ private:
 		const vector<string>& actors);
 
 private:
+	/*
+	 * A helper function to calculate weight for a list of strings.
+	 *
+	 * If the search term is found in the list, the given weight
+	 * is added to the weighted sum field.
+	 *
+	 * Otherwise, weight will be subtracted.
+	 */
+	void CalculateWeight(const vector<string> list, const string& searchFor, double weight);
+
+private:
+	/* the actual movie object */
 	Movie movie;
-	int weightedSum;
+
+	/* the weight sum of the movie */
+	double weightedSum;
 };
 
 #endif

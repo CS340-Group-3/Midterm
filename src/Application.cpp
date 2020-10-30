@@ -34,6 +34,8 @@ int main() {
 		parser.ParseMovie(list, tokenizer);
 	}
 
+	// list.sort(user_input)
+
 	list.PrintFirst10Movies();
 
 	return 0;

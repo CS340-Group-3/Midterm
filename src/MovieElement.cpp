@@ -19,71 +19,33 @@ void MovieElement::CalculateWeightedSum(
 	const vector<string>& writers,
 	const vector<string>& actors) {
 
+	// reset sum before calculating
+	weightedSum = 0;
+
 	unsigned int index;
 	unsigned int length;
 
-	for (index = 0, length = genres.size(); index < length; ++index) {
-		if (movie.genres.find(genres[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
-
-	for (index = 0, length = countries.size(); index < length; ++index) {
-		if (movie.countries.find(countries[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
-
-	for (index = 0, length = languages.size(); index < length; ++index) {
-		if (movie.languages.find(languages[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
-
-	for (index = 0, length = directors.size(); index < length; ++index) {
-		if (movie.directors.find(directors[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
-
-	for (index = 0, length = writers.size(); index < length; ++index) {
-		if (movie.writers.find(writers[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
-
-	for (index = 0, length = actors.size(); index < length; ++index) {
-		if (movie.actors.find(actors[index]) != string::npos) {
-			weightedSum += 100;
-		} else {
-			weightedSum -= 100;
-		}
-	}
+	CalculateWeight(genres,    movie.genres,    10);
+	CalculateWeight(countries, movie.countries, 10);
+	CalculateWeight(languages, movie.languages, 10);
+	CalculateWeight(directors, movie.directors, 10);
+	CalculateWeight(writers,   movie.writers,   10);
+	CalculateWeight(actors,    movie.actors,    10);
 
 	if (year != -1) {
 		int deltaYear = movie.year - year;
 		// carries less weight the larger the difference
-		weightedSum -= deltaYear * deltaYear;
+		weightedSum -= (double) deltaYear * deltaYear;
 	}
 
 	if (duration != -1) {
 		int deltaDuration = movie.duration - duration;
 		// carries less weight the larger the difference
-		weightedSum -= deltaDuration * deltaDuration;
+		weightedSum -= (double) deltaDuration * deltaDuration;
 	}
 
 	if (rating != -1) {
-		int deltaRating = movie.rating - rating;
+		double deltaRating = movie.rating - rating;
 
 		if (rating < movie.rating) {
 			// carries more weight if the movie rating
@@ -93,6 +55,21 @@ void MovieElement::CalculateWeightedSum(
 			// carries less weight if the movie rating
 			// is worse than user input
 			weightedSum -= deltaRating * deltaRating;
+		}
+	}
+}
+
+void MovieElement::CalculateWeight(const vector<string> list, const string& str, double weight) {
+	unsigned int length = list.size();
+	unsigned int index = 0;
+
+	for (; index < length; ++index) {
+		if (str.find(list[index]) != string::npos) {
+			// found, carries more weight
+			weightedSum += weight * weight;
+		} else {
+			// not found, carries less weight
+			weightedSum -= weight * weight;
 		}
 	}
 }
