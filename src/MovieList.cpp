@@ -14,24 +14,12 @@ void MovieList::Add(const Movie& movie) {
 	movies.push_back(movie);
 }
 
-void MovieList::Sort(
-	int year, int duration, double rating,
-	const vector<string>& genres,
-	const vector<string>& countries,
-	const vector<string>& languages,
-	const vector<string>& directors,
-	const vector<string>& writers,
-	const vector<string>& actors) {
-
-	unsigned int size = min((int)movies.size(), 10);
+void MovieList::Sort(const UserInput& input) {
+	unsigned int size = min((int) movies.size(), 10);
 	unsigned int index;
 
 	for (index = 0; index < size; ++index) {
-		movies[index].CalculateWeightedSum(
-			year, duration, rating,
-			genres, countries, languages,
-			directors, writers, actors
-		);
+		movies[index].CalculateWeightedSum(input);
 	}
 
 	sort(movies.begin(), movies.end());
@@ -40,6 +28,11 @@ void MovieList::Sort(
 void MovieList::PrintFirst10Movies() const {
 	unsigned int size = min((int) movies.size(), 10);
 	unsigned int index;
+
+	if (size <= 0) {
+		cout << "Resulting list is empty!" << endl;
+		return;
+	}
 
 	for (index = 1; index <= size; ++index) {
 		Movie movie = movies[index - 1].GetMovie();

@@ -10,44 +10,33 @@ MovieElement::MovieElement(const Movie& _movie)
 	: movie(_movie), weightedSum(0) {
 }
 
-void MovieElement::CalculateWeightedSum(
-	int year, int duration, double rating,
-	const vector<string>& genres,
-	const vector<string>& countries,
-	const vector<string>& languages,
-	const vector<string>& directors,
-	const vector<string>& writers,
-	const vector<string>& actors) {
-
+void MovieElement::CalculateWeightedSum(const UserInput& input) {
 	// reset sum before calculating
 	weightedSum = 0;
 
-	unsigned int index;
-	unsigned int length;
+	CalculateWeight(input.genres,    movie.genres,    10);
+	CalculateWeight(input.countries, movie.countries, 10);
+	CalculateWeight(input.languages, movie.languages, 10);
+	CalculateWeight(input.directors, movie.directors, 10);
+	CalculateWeight(input.writers,   movie.writers,   10);
+	CalculateWeight(input.actors,    movie.actors,    10);
 
-	CalculateWeight(genres,    movie.genres,    10);
-	CalculateWeight(countries, movie.countries, 10);
-	CalculateWeight(languages, movie.languages, 10);
-	CalculateWeight(directors, movie.directors, 10);
-	CalculateWeight(writers,   movie.writers,   10);
-	CalculateWeight(actors,    movie.actors,    10);
-
-	if (year != -1) {
-		int deltaYear = movie.year - year;
+	if (input.year != -1) {
+		int deltaYear = movie.year - input.year;
 		// carries less weight the larger the difference
 		weightedSum -= (double) deltaYear * deltaYear;
 	}
 
-	if (duration != -1) {
-		int deltaDuration = movie.duration - duration;
+	if (input.duration != -1) {
+		int deltaDuration = movie.duration - input.duration;
 		// carries less weight the larger the difference
 		weightedSum -= (double) deltaDuration * deltaDuration;
 	}
 
-	if (rating != -1) {
-		double deltaRating = movie.rating - rating;
+	if (input.rating != -1) {
+		double deltaRating = movie.rating - input.rating;
 
-		if (rating < movie.rating) {
+		if (input.rating < movie.rating) {
 			// carries more weight if the movie rating
 			// is better than user input
 			weightedSum += deltaRating * deltaRating;

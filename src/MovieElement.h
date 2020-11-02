@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Movie.h"
+#include "UserInput.h"
 
 using namespace std;
 
@@ -36,14 +37,7 @@ public:
 	 * field. More weight will sort higher in the
 	 * movie list
 	 */
-	void CalculateWeightedSum(
-		int year, int duration, double rating,
-		const vector<string>& genre,
-		const vector<string>& countries,
-		const vector<string>& languages,
-		const vector<string>& directors,
-		const vector<string>& writers,
-		const vector<string>& actors);
+	void CalculateWeightedSum(const UserInput& input);
 
 private:
 	/*
