@@ -50,7 +50,7 @@ private:
 	 */
 	void CalculateWeight(const vector<string> list, const string& searchFor, double weight);
 
-private:
+public:
 	/* the actual movie object */
 	Movie movie;
 

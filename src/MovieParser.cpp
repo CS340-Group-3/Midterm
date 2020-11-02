@@ -5,11 +5,16 @@ void MovieParser::ParseMovie(MovieList& list, Tokenizer& tokenizer) {
 
 	tokenizer.NextToken(); // imdb_title_id
 
+	tokenizer.NextToken(); // title (unused)
+
 	movie.title = tokenizer.NextToken();
 
-	tokenizer.NextToken(); // original_title
-
-	movie.year = stoi(tokenizer.NextToken());
+	string token = tokenizer.NextToken();
+	if (token.length() == 4) {
+		movie.year = stoi(token);
+	} else {
+		cout << "Error parsing year token '" << token << "' for movie title '" << movie.title << '\'' << endl;
+	}
 
 	tokenizer.NextToken(); // date
 

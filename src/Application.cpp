@@ -23,10 +23,6 @@ int main() {
 	movieList.PrintFirst10Movies()
 	*/
 
-	MovieList list;
-	MovieParser parser;
-	Tokenizer tokenizer;
-
 	ifstream input;
 
 	input.open("res/IMDb movies.csv");
@@ -36,7 +32,15 @@ int main() {
 		exit(1);
 	}
 
+	MovieList list;
+	MovieParser parser;
+	Tokenizer tokenizer;
 	string csvLine;
+
+	cout << "Parsing movie library" << endl;
+
+	// skip the first csv line, its just
+	// the format of the csv data
 	getline(input, csvLine);
 	tokenizer.Tokenize(csvLine);
 
@@ -47,7 +51,15 @@ int main() {
 
 	input.close();
 
-	// list.sort(user_input)
+	UserInput in;
+	in.genres.push_back("Action");
+	in.countries.push_back("USA");
+	in.countries.push_back("UK");
+	in.languages.push_back("English");
+	in.rating = 7.0;
+	in.year = 2010;
+
+	list.Sort(in);
 
 	list.PrintFirst10Movies();
 
