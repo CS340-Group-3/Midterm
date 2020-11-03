@@ -24,12 +24,15 @@
     <ClCompile Include="src\MovieElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MovieList.cpp">
+    <ClCompile Include="src\MovieLibrary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="src\MovieParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> c6399c0b09025434d41186d9957c734fee347ede
     <ClCompile Include="src\UserInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,16 +44,13 @@
     <ClInclude Include="src\MovieElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MovieList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Movie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MovieParser.h">
+    <ClInclude Include="src\UserInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserInput.h">
+    <ClInclude Include="src\MovieLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

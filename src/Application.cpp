@@ -3,9 +3,8 @@
 #include <iomanip>
 #include <fstream>
 
-#include "Tokenizer.h"
-#include "MovieList.h"
-#include "MovieParser.h"
+#include "MovieLibrary.h"
+#include "UserInput.h"
 
 using namespace std;
 
@@ -102,7 +101,7 @@ void updateInput(vector <string> &v) {
 	}
 }
 
-void inputLoop(UserInput &in, MovieList &list) {
+void inputLoop(UserInput &in, MovieLibrary & library) {
 	int choice;
 	bool isRunning = true;
 	
@@ -140,8 +139,8 @@ void inputLoop(UserInput &in, MovieList &list) {
 			isRunning = false;
 			break;
 		case 1:
-			list.Sort(in);
-			list.PrintFirst10MoviesTitle();
+			library.Sort(in);
+			library.PrintFirst10MovieTitles();
 			break;
 		case 2:
 			updateInput(in.year);
@@ -179,7 +178,7 @@ void inputLoop(UserInput &in, MovieList &list) {
 		}
 	}
 }
-void mainLoop(MovieList& list) {
+void mainLoop(MovieLibrary& library) {
 	int choice;
 	bool isRunning = true;
 	UserInput in;
@@ -203,7 +202,7 @@ void mainLoop(MovieList& list) {
 		case 1:
 			cout << "Going to find movie menu..." << endl;
 			system("CLS");
-			inputLoop(in, list);
+			inputLoop(in, library);
 			break;
 		//case 2:
 		//	cout << "You choose 2" << endl;
@@ -229,61 +228,36 @@ int main() {
 	movieList.sort(input)
 	movieList.PrintFirst10Movies()
 	*/
-	
-	ifstream input;
 
-	input.open("res/IMDb movies.csv");
+	MovieLibrary library;
+	library.LoadLibrary("res/IMDb movies.csv");
+	mainLoop(library);
 
-	if (input.fail()) {
-		cout << "Error. Cannot open file" << endl;
-		exit(1);
-	}
+	//UserInput in;
+	//{// test user input
+	//	in.genres.push_back("Action");
+	//	in.countries.push_back("USA");
+	//	in.countries.push_back("UK");
+	//	in.languages.push_back("English");
+	//	in.rating = 7.0;
 
-	MovieList list;
-	MovieParser parser;
-	Tokenizer tokenizer;
-	string csvLine;
+	//	library.Sort(in);
+	//	library.PrintFirst10MovieTitles();
+	//}
 
-	cout << "Parsing movie library" << endl;
+	//{// now test with year 2015
+	//	in.year = 2015;
+	//	library.Sort(in);
+	//	library.PrintFirst10MovieTitles();
+	//}
 
-	// skip the first csv line, its just
-	// the format of the csv data
-	getline(input, csvLine);
-	tokenizer.Tokenize(csvLine);
+	//{// now test with duration of 100 minutes (1:40:00)
+	//	in.duration = 100; // 1:40:00
+	//	library.Sort(in);
+	//	library.PrintFirst10MovieTitles();
+	//}
 
-	while (getline(input, csvLine)) {
-		tokenizer.Tokenize(csvLine);
-		parser.ParseMovie(list, tokenizer);
-	}
 
-	input.close();
-	
-	mainLoop(list);
-	UserInput in;
-	{// test user input
-		in.genres.push_back("Action");
-		in.countries.push_back("USA");
-		in.countries.push_back("UK");
-		in.languages.push_back("English");
-		in.rating = 7.0;
-
-		list.Sort(in);
-		list.PrintFirst10Movies();
-	}
-
-	{// now test with year 2015
-		in.year = 2015;
-		list.Sort(in);
-		list.PrintFirst10Movies();
-	}
-
-	{// now test with duration of 100 minutes (1:40:00)
-		in.duration = 100; // 1:40:00
-		list.Sort(in);
-		list.PrintFirst10Movies();
-	}
-
-	list.Sort(in);
 	cout << "Finished without error";
 	return 0;
 }

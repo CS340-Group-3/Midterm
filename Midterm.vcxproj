@@ -142,15 +142,13 @@
     <ClCompile Include="src\UserInput.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\MovieElement.cpp" />
-    <ClCompile Include="src\MovieList.cpp" />
-    <ClCompile Include="src\MovieParser.cpp" />
+    <ClCompile Include="src\MovieLibrary.cpp" />
     <ClCompile Include="src\Tokenizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Movie.h" />
     <ClInclude Include="src\MovieElement.h" />
-    <ClInclude Include="src\MovieList.h" />
-    <ClInclude Include="src\MovieParser.h" />
+    <ClInclude Include="src\MovieLibrary.h" />
     <ClInclude Include="src\Tokenizer.h" />
     <ClInclude Include="src\UserInput.h" />
   </ItemGroup>

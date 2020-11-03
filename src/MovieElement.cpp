@@ -54,12 +54,44 @@ void MovieElement::CalculateWeightedSum(const UserInput& input) {
 	}
 }
 
-void MovieElement::CalculateWeight(const vector<string> list, const string& str, double weight) {
-	unsigned int length = list.size();
-	unsigned int index = 0;
+bool ContainsIgnoreCase(const string& str, const string& search) {
+	unsigned int strLength = str.length();
+	unsigned int searchLength = search.length();
 
-	for (; index < length; ++index) {
-		if (str.find(list[index]) != string::npos) {
+	if (strLength < searchLength) {
+		// fail fast
+		return false;
+	}
+
+	unsigned int strIndex = 0;
+	unsigned int searchIndex = 0;
+
+	for (; strIndex < strLength; ++strIndex) {
+		if (tolower(search[searchIndex++]) != tolower(str[strIndex])) {
+			// char mismatch - reset search index
+			searchIndex = 0;
+		}
+
+		if (searchIndex == searchLength) {
+			// whole string was found, return true
+			return true;
+		}
+
+		if (searchIndex == strLength) {
+			// out of bounds, not found
+			return false;
+		}
+	}
+
+	// end of str, no match
+	return false;
+}
+
+void MovieElement::CalculateWeight(const vector<string> list, const string& str, double weight) {
+	unsigned int size = list.size();
+
+	while (size > 0) {
+		if (ContainsIgnoreCase(str, list[--size])) {
 			// found, carries more weight
 			weightedSum += weight * weight;
 		} else {
