@@ -40,11 +40,11 @@ void MovieLibrary::LoadLibrary(const string& path) {
 
 void MovieLibrary::Sort(const UserInput& input) {
 	unsigned int size = max((int) movieList.size(), 10);
-	unsigned int index;
 
 	cout << "Calculating weights for " << size << " movies..." << endl;
-	for (index = 0; index < size; ++index) {
-		movieList[index].CalculateWeightedSum(input);
+
+	while (size > 0) {
+		movieList[--size].CalculateWeightedSum(input);
 	}
 
 	cout << "Sorting movie list..." << endl;
@@ -53,12 +53,13 @@ void MovieLibrary::Sort(const UserInput& input) {
 
 void MovieLibrary::PrintFirst10MovieTitles() const {
 	unsigned int size = min((int) movieList.size(), 10);
-	unsigned int index;
 
 	if (size <= 0) {
 		cout << "Resulting list is empty!" << endl;
 		return;
 	}
+
+	unsigned int index;
 
 	for (index = 1; index <= size; ++index) {
 		Movie movie = movieList[index - 1].GetMovie();
