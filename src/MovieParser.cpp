@@ -9,11 +9,12 @@ void MovieParser::ParseMovie(MovieList& list, Tokenizer& tokenizer) {
 
 	movie.title = tokenizer.NextToken();
 
-	string token = tokenizer.NextToken();
-	if (token.length() == 4) {
-		movie.year = stoi(token);
+	string year = tokenizer.NextToken();
+
+	if (year.length() == 4) {
+		movie.year = stoi(year);
 	} else {
-		cout << "Error parsing year token '" << token << "' for movie title '" << movie.title << '\'' << endl;
+		cout << "Error parsing year token '" << year << "' for movie title '" << movie.title << '\'' << endl;
 	}
 
 	tokenizer.NextToken(); // date

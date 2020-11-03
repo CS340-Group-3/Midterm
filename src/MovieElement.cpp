@@ -14,7 +14,11 @@ void MovieElement::CalculateWeightedSum(const UserInput& input) {
 	// reset sum before calculating
 	weightedSum = 0;
 
-	// use static weight of 5 for each list 
+	// Using a weight of 5 scales each found element in list
+	// by equating to:
+	//     weight of 1 year difference
+	//     weight of 25 minute difference
+	//     weight of 5.0 rating difference
 	CalculateWeight(input.genres,    movie.genres,    5.0);
 	CalculateWeight(input.countries, movie.countries, 5.0);
 	CalculateWeight(input.languages, movie.languages, 5.0);
@@ -23,15 +27,14 @@ void MovieElement::CalculateWeightedSum(const UserInput& input) {
 	CalculateWeight(input.actors,    movie.actors,    5.0);
 
 	if (input.year != -1) {
-		// every 3 year difference should quadratically decrease weight
-		double deltaYear = ((double) movie.year - input.year) / 3.0;
+		double deltaYear = (double) movie.year - input.year;
 		// carries less weight the larger the difference
-		weightedSum -= (double) deltaYear * deltaYear;
+		weightedSum -= deltaYear * deltaYear;
 	}
 
 	if (input.duration != -1) {
-		// every 10 minute difference should quadratically decrease weight
-		double deltaDuration = ((double) movie.duration - input.duration) / 10.0;
+		// every 5 minute difference should quadratically decrease weight
+		double deltaDuration = ((double) movie.duration - input.duration) / 5.0;
 		// carries less weight the larger the difference
 		weightedSum -= deltaDuration * deltaDuration;
 	}

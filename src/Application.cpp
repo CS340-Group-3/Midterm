@@ -9,8 +9,6 @@
 
 using namespace std;
 
-Movie ParseMovie(Tokenizer& tokenizer);
-
 void menuLoop() {
 	int choice;
 	bool isRunning = true;
@@ -88,15 +86,30 @@ int main() {
 	input.close();
 
 	UserInput in;
-	in.genres.push_back("Action");
-	in.countries.push_back("USA");
-	in.countries.push_back("UK");
-	in.languages.push_back("English");
-	in.rating = 7.0;
-	in.year = 2010;
+
+	{// test user input
+		in.genres.push_back("Action");
+		in.countries.push_back("USA");
+		in.countries.push_back("UK");
+		in.languages.push_back("English");
+		in.rating = 7.0;
+
+		list.Sort(in);
+		list.PrintFirst10Movies();
+	}
+
+	{// now test with year 2015
+		in.year = 2015;
+		list.Sort(in);
+		list.PrintFirst10Movies();
+	}
+
+	{// now test with duration of 100 minutes (1:40:00)
+		in.duration = 100; // 1:40:00
+		list.Sort(in);
+		list.PrintFirst10Movies();
+	}
 
 	list.Sort(in);
-	
-
 	return 0;
 }

@@ -15,8 +15,8 @@ using namespace std;
  * respective default empty values.
  */
 struct UserInput {
-	int year = -1;
-	int duration = -1;
+	short year = -1;
+	short duration = -1;
 	double rating = -1;
 	vector<string> genres;
 	vector<string> countries;

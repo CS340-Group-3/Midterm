@@ -33,7 +33,7 @@ public:
 	/*
 	 * Calculates the weighted sum for the movie.
 	 * Each field from the movie will be compared
-	 * to the parameters and sets the weightedSum
+	 * to user input and sets the weightedSum
 	 * field. More weight will sort higher in the
 	 * movie list
 	 */
