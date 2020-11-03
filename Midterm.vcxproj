@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="UserInput.cpp" />
+    <ClCompile Include="src\UserInput.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\MovieElement.cpp" />
     <ClCompile Include="src\MovieList.cpp" />

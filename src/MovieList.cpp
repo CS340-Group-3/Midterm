@@ -66,7 +66,6 @@ void MovieList::PrintFirst10MoviesTitle() const {
 
 	for (index = 1; index <= size; ++index) {
 		Movie movie = movies[index - 1].GetMovie();
-		cout << "----------------------------------------" << endl;
 		cout << index << ". '" << movie.title << '\'' << endl;
 	}
 	cout << "----------------------------------------" << endl;
