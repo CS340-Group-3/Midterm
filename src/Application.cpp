@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <iomanip>
 #include <fstream>
 
 #include "Tokenizer.h"
@@ -9,32 +9,92 @@
 
 using namespace std;
 
-void menuLoop() {
+const int WIDTH = 50;
+
+void printMenuLine(int number, string option) {
+	string line;
+	line += "| ";
+	line += to_string(number);
+	line += ". ";
+	line += option;
+	cout << left << setw(WIDTH) << line << setfill(' ') << "|" << endl;
+}
+
+void inputLoop(UserInput &in, MovieList &list) {
 	int choice;
 	bool isRunning = true;
+	cout << "\nYour current preference:" << endl;
+	in.genres.push_back("Action");
+	in.countries.push_back("USA");
+	in.countries.push_back("UK");
+	in.languages.push_back("English");
+	in.rating = 7.0;
+	in.print();
 	while (isRunning) {
-		cout << "+-----------------------------------------------+" << endl;
-		cout << "|        Menu Recommendation Program            |" << endl;
-		cout << "| 1. Find a movie.                              |" << endl;
-		cout << "| 2. See trending/popular movies.               |" << endl;
-		cout << "| 3. Exit program.                              |" << endl;
-		cout << "|                                               |" << endl;
-		cout << "+-----------------------------------------------+" << endl;
+		cout << "+-------------------------------------------------+" << endl;
+		cout << "|             Find movie menu                     |" << endl;
+		printMenuLine(0, "Back to previous menu");
+		printMenuLine(1, "Find movies with current preferences");
+		printMenuLine(2, "Change movie year");
+		printMenuLine(3, "Change duration");
+		printMenuLine(4, "Change rating");
+		printMenuLine(5, "Change genres");
+		printMenuLine(6, "Change countries");
+		printMenuLine(7, "Change languages");
+		printMenuLine(8, "Change directors");
+		printMenuLine(9, "Change writers");
+		printMenuLine(10, "Change actors");
+		cout << "+-------------------------------------------------+" << endl;
+
+		cout << "Enter your choice: ";
+		cin >> choice;
+
+		switch (choice) {
+		case 0:
+			cout << "Going back to previous menu ..." << endl;
+			isRunning = false;
+			break;
+		case 1:
+			list.Sort(in);
+			list.PrintFirst10MoviesTitle();
+			break;
+		case 2:
+			cout << "You choose 2" << endl;
+			break;
+
+		default:
+			cout << "Invalid option." << endl;
+			break;
+		}
+	}
+}
+void mainLoop(MovieList& list) {
+	int choice;
+	bool isRunning = true;
+	UserInput in;
+	while (isRunning) {
+		cout << "+-------------------------------------------------+" << endl;
+		cout << "|             Movie Recommendation                |" << endl;
+		printMenuLine(1, "Find a Movie");
+		//printMenuLine(2, "See trending/popular movies");
+		printMenuLine(2, "Exit program");
+		cout << "+-------------------------------------------------+" << endl;
 
 		cout << "Enter your choice: ";
 		cin >> choice;
 
 		switch (choice) {
 		case 1:
-			cout << "You choose 1" << endl;
+			cout << "Going to find movie menu..." << endl;
+			inputLoop(in, list);
 			break;
+		//case 2:
+		//	cout << "You choose 2" << endl;
+		//	break;
 		case 2:
-			cout << "You choose 2" << endl;
-			break;
-		case 3:
 			cout << "You choose 3" << endl;
 			isRunning = false;
-				break;
+			break;
 		default:
 			cout << "Invalid option." << endl;
 			break;
@@ -55,8 +115,7 @@ int main() {
 	movieList.sort(input)
 	movieList.PrintFirst10Movies()
 	*/
-	menuLoop();
-
+	
 	ifstream input;
 
 	input.open("res/IMDb movies.csv");
@@ -84,9 +143,10 @@ int main() {
 	}
 
 	input.close();
+	
+	mainLoop(list);
 
 	UserInput in;
-
 	{// test user input
 		in.genres.push_back("Action");
 		in.countries.push_back("USA");
@@ -111,5 +171,6 @@ int main() {
 	}
 
 	list.Sort(in);
+	cout << "Finished without error";
 	return 0;
 }

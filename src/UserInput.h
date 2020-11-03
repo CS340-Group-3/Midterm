@@ -14,6 +14,7 @@ using namespace std;
  * All data is initialized to their
  * respective default empty values.
  */
+
 struct UserInput {
 	short year = -1;
 	short duration = -1;
@@ -24,6 +25,7 @@ struct UserInput {
 	vector<string> directors;
 	vector<string> writers;
 	vector<string> actors;
+	void print();
 };
 
 #endif

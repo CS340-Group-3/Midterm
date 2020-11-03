@@ -54,3 +54,20 @@ void MovieList::PrintFirst10Movies() const {
 	}
 	cout << "----------------------------------------" << endl;
 }
+
+void MovieList::PrintFirst10MoviesTitle() const {
+	unsigned int size = min((int)movies.size(), 10);
+	unsigned int index;
+
+	if (size <= 0) {
+		cout << "Resulting list is empty!" << endl;
+		return;
+	}
+
+	for (index = 1; index <= size; ++index) {
+		Movie movie = movies[index - 1].GetMovie();
+		cout << "----------------------------------------" << endl;
+		cout << index << ". '" << movie.title << '\'' << endl;
+	}
+	cout << "----------------------------------------" << endl;
+}

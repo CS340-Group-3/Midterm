@@ -29,6 +29,7 @@ public:
 
 	/* Prints the first 10 movies from the movie list */
 	void PrintFirst10Movies() const;
+	void PrintFirst10MoviesTitle() const;
 
 private:
 	/* the list of movies */
