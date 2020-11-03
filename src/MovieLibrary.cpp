@@ -51,7 +51,7 @@ void MovieLibrary::Sort(const UserInput& input) {
 	sort(movieList.begin(), movieList.end());
 }
 
-void MovieLibrary::PrintFirst10Movies() const {
+void MovieLibrary::PrintFirst10MovieTitles() const {
 	unsigned int size = min((int) movieList.size(), 10);
 	unsigned int index;
 

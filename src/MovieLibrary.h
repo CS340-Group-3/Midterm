@@ -35,7 +35,7 @@ public:
 	void Sort(const UserInput& input);
 
 	/* Prints the first 10 movies from the movie list */
-	void PrintFirst10Movies() const;
+	void PrintFirst10MovieTitles() const;
 
 private:
 	/*
