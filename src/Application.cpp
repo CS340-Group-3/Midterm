@@ -3,9 +3,8 @@
 
 #include <fstream>
 
-#include "Tokenizer.h"
-#include "MovieList.h"
-#include "MovieParser.h"
+#include "MovieLibrary.h"
+#include "UserInput.h"
 
 using namespace std;
 
@@ -55,35 +54,11 @@ int main() {
 	movieList.sort(input)
 	movieList.PrintFirst10Movies()
 	*/
+
 	menuLoop();
 
-	ifstream input;
-
-	input.open("res/IMDb movies.csv");
-
-	if (input.fail()) {
-		cout << "Error. Cannot open file" << endl;
-		exit(1);
-	}
-
-	MovieList list;
-	MovieParser parser;
-	Tokenizer tokenizer;
-	string csvLine;
-
-	cout << "Parsing movie library" << endl;
-
-	// skip the first csv line, its just
-	// the format of the csv data
-	getline(input, csvLine);
-	tokenizer.Tokenize(csvLine);
-
-	while (getline(input, csvLine)) {
-		tokenizer.Tokenize(csvLine);
-		parser.ParseMovie(list, tokenizer);
-	}
-
-	input.close();
+	MovieLibrary library;
+	library.LoadLibrary("res/IMDb movies.csv");
 
 	UserInput in;
 
@@ -94,22 +69,22 @@ int main() {
 		in.languages.push_back("English");
 		in.rating = 7.0;
 
-		list.Sort(in);
-		list.PrintFirst10Movies();
+		library.Sort(in);
+		library.PrintFirst10Movies();
 	}
 
 	{// now test with year 2015
 		in.year = 2015;
-		list.Sort(in);
-		list.PrintFirst10Movies();
+		library.Sort(in);
+		library.PrintFirst10Movies();
 	}
 
 	{// now test with duration of 100 minutes (1:40:00)
 		in.duration = 100; // 1:40:00
-		list.Sort(in);
-		list.PrintFirst10Movies();
+		library.Sort(in);
+		library.PrintFirst10Movies();
 	}
 
-	list.Sort(in);
+	library.Sort(in);
 	return 0;
 }

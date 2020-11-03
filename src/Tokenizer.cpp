@@ -3,11 +3,11 @@
 #include "Tokenizer.h"
 
 Tokenizer::Tokenizer()
-    : delimiter(','), escape('"'), tokens(16), currentToken(0) {
+    : delimiter(','), escape('"'), tokens(21), currentToken(0) {
 }
 
 Tokenizer::Tokenizer(char delimiter, char escape)
-    : delimiter(delimiter), escape(escape), tokens(16), currentToken(0) {
+    : delimiter(delimiter), escape(escape), tokens(21), currentToken(0) {
 }
 
 void Tokenizer::Tokenize(const string& line) {
