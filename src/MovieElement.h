@@ -48,14 +48,14 @@ private:
 	 *
 	 * Otherwise, weight will be subtracted.
 	 */
-	void CalculateWeight(const vector<string> list, const string& searchFor, double weight);
+	void CalculateWeight(const vector<string> list, const string& searchFor, float weight);
 
 private:
 	/* the actual movie object */
 	Movie movie;
 
 	/* the weight sum of the movie */
-	double weightedSum;
+	float weightedSum;
 };
 
 #endif

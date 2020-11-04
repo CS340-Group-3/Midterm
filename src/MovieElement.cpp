@@ -27,20 +27,20 @@ void MovieElement::CalculateWeightedSum(const UserInput& input) {
 	CalculateWeight(input.actors,    movie.actors,    5.0);
 
 	if (input.year != -1) {
-		double deltaYear = (double) movie.year - input.year;
+		float deltaYear = movie.year - input.year;
 		// carries less weight the larger the difference
 		weightedSum -= deltaYear * deltaYear;
 	}
 
 	if (input.duration != -1) {
 		// every 5 minute difference should quadratically decrease weight
-		double deltaDuration = ((double) movie.duration - input.duration) / 5.0;
+		float deltaDuration = (movie.duration - input.duration) / 5.0f;
 		// carries less weight the larger the difference
 		weightedSum -= deltaDuration * deltaDuration;
 	}
 
 	if (input.rating != -1) {
-		double deltaRating = movie.rating - input.rating;
+		float deltaRating = movie.rating - input.rating;
 
 		if (input.rating > movie.rating) {
 			// carries less weight if the movie rating
@@ -76,18 +76,13 @@ bool ContainsIgnoreCase(const string& str, const string& search) {
 			// whole string was found, return true
 			return true;
 		}
-
-		if (searchIndex == strLength) {
-			// out of bounds, not found
-			return false;
-		}
 	}
 
 	// end of str, no match
 	return false;
 }
 
-void MovieElement::CalculateWeight(const vector<string> list, const string& str, double weight) {
+void MovieElement::CalculateWeight(const vector<string> list, const string& str, float weight) {
 	unsigned int size = list.size();
 
 	while (size > 0) {

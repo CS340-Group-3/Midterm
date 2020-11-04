@@ -20,7 +20,7 @@ struct Movie {
 	string writers;
 	string description;
 	string actors;
-	double rating = -1;
+	float rating = -1;
 };
 
 #endif

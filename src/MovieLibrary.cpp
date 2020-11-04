@@ -104,7 +104,7 @@ void MovieLibrary::ParseMovie(Tokenizer& tokenizer) {
 	tokenizer.NextToken(); // skip production company
 	movie.actors = tokenizer.NextToken();
 	movie.description = tokenizer.NextToken();
-	movie.rating = stod(tokenizer.NextToken());
+	movie.rating = stof(tokenizer.NextToken());
 
 	// skip the remaining tokens:
 	//    budget
