@@ -31,8 +31,8 @@ void updateInput(short& value) {
 	return;
 }
 
-void updateInput(double& value) {
-	double tmp;
+void updateInput(float& value) {
+	float tmp;
 	system("CLS");
 	cout << "Current value: ";
 	if (value != -1) cout << value << endl;

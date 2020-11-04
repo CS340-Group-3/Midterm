@@ -16,6 +16,8 @@ void MovieLibrary::LoadLibrary(const string& path) {
 
 	if (file.fail()) {
 		cout << "Failed to open file from path '" << path << '\'' << endl;
+		cout << "Press 'enter' to exit..." << endl;
+		cin.get();
 		exit(1);
 	}
 

@@ -18,7 +18,7 @@ using namespace std;
 struct UserInput {
 	short year = -1;
 	short duration = -1;
-	double rating = -1;
+	float rating = -1;
 	vector<string> genres;
 	vector<string> countries;
 	vector<string> languages;
