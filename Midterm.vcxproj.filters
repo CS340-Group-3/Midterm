@@ -27,6 +27,12 @@
     <ClCompile Include="src\MovieLibrary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="src\MovieParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> c6399c0b09025434d41186d9957c734fee347ede
     <ClCompile Include="src\UserInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
